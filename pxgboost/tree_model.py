@@ -149,13 +149,13 @@ class Tree(object):
 
         feature_cols = list(X.columns)
 
-        #pool = multiprocessing.Pool(1 if self.num_thread == -1 else self.num_thread)
-        #reses = pool.map(func, feature_cols)
-        #pool.close()
+        pool = multiprocessing.Pool(1 if self.num_thread == -1 else self.num_thread)
+        reses = pool.map(func, feature_cols)
+        pool.close()
         func(feature_cols[1])
 
         for res in reses:
-            if reses[2] > best_gain:
+            if res[2] > best_gain:
                 best_feature = res[0]
                 best_cond = res[1]
                 best_gain = res[2]
